@@ -165,4 +165,3 @@ vsim -c -do "run -all; quit" psmac_top_tb
 - **Author**: Hari Kruthik SK  
 - **Institution**: School of Electronics Engineering (SENSE), Vellore Institute of Technology (VIT), Vellore  
 - **Reference**: *"A Precision-Scalable Energy-Efficient Bit-Serial Multiply-Accumulate Accelerator for Deep Neural Networks"*, IEEE Transactions on Circuits and Systems II (TCAS-II).
-- **License**: Released under the [MIT License](LICENSE).
