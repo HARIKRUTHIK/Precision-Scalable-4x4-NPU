@@ -1,0 +1,342 @@
+
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: var(--font-sans); }
+  .pitch { padding: 1rem 0; }
+  .section { margin-bottom: 2rem; border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); background: var(--color-background-primary); overflow: hidden; }
+  .sec-header { padding: 0.75rem 1.25rem; display: flex; align-items: center; gap: 10px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+  .sec-num { width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 500; flex-shrink: 0; }
+  .sec-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+  .sec-tag { font-size: 11px; padding: 2px 8px; border-radius: var(--border-radius-md); margin-left: auto; }
+  .sec-body { padding: 1rem 1.25rem; }
+  .line { font-size: 14px; color: var(--color-text-primary); line-height: 1.75; margin-bottom: 0.5rem; }
+  .line:last-child { margin-bottom: 0; }
+  .key { font-weight: 500; }
+  .muted { color: var(--color-text-secondary); font-size: 13px; line-height: 1.6; margin-top: 0.4rem; margin-bottom: 0.6rem; font-style: italic; }
+  .divider { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 0.75rem 0; }
+  .pill-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.5rem; }
+  .pill { font-size: 12px; padding: 3px 10px; border-radius: 99px; font-weight: 500; }
+  .module-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: 8px; margin-top: 0.5rem; }
+  .mod-card { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-md); padding: 10px 12px; }
+  .mod-name { font-size: 13px; font-weight: 500; color: var(--color-text-primary); margin-bottom: 3px; }
+  .mod-desc { font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+  .quote { border-left: 3px solid; padding-left: 12px; margin: 0.75rem 0; font-size: 14px; line-height: 1.7; color: var(--color-text-primary); }
+  .speaker-badge { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: var(--border-radius-md); margin-bottom: 6px; font-weight: 500; }
+</style>
+<div class="pitch">
+
+  <div style="margin-bottom:1.5rem; padding: 0 0.25rem;">
+    <p style="font-size:22px; font-weight:500; color:var(--color-text-primary); line-height:1.3; margin-bottom:6px;">Precision-Scalable NPU 4×4</p>
+    <p style="font-size:14px; color:var(--color-text-secondary);">Full team pitch script — split by module/section</p>
+  </div>
+
+  <!-- SECTION 1: HOOK / INTRO -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num" style="background:#E6F1FB; color:#185FA5;">1</div>
+      <span class="sec-title">The Hook — Why This Project Exists</span>
+      <span class="sec-tag" style="background:#E6F1FB; color:#185FA5;">Opening</span>
+    </div>
+    <div class="sec-body">
+      <div class="speaker-badge" style="background:#E6F1FB; color:#185FA5;">Any team member</div>
+      <div class="quote" style="border-color:#378ADD;">
+        "Imagine you have a calculator that's really slow when it's being careful and accurate, but blazing fast when it just needs a rough answer. What if the same calculator could switch between those modes on the fly — without you buying a new one? That's exactly what we built."
+      </div>
+      <hr class="divider">
+      <div class="line">Today's AI chips — like the ones inside your phone or smartwatch — do a lot of math called <span class="key">multiply-and-add</span>. They do it millions of times per second to recognize your face, understand your voice, or detect if your heart is beating oddly.</div>
+      <div class="line">The problem? Most chips are stuck at one level of precision. They're always "being very careful" even when they don't need to be. That wastes power and time.</div>
+      <div class="line">We built a chip architecture — in Verilog, running on a real FPGA — that <span class="key">dynamically switches precision</span>: full accuracy when needed, 4× faster when speed matters more. Same hardware. Zero extra cost.</div>
+      <div class="pill-row">
+        <span class="pill" style="background:#E6F1FB; color:#185FA5;">INT8 — full accuracy</span>
+        <span class="pill" style="background:#EAF3DE; color:#3B6D11;">INT4 — 2× faster</span>
+        <span class="pill" style="background:#EEEDFE; color:#534AB7;">INT2 — 4× faster</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2: SBB -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num" style="background:#EEEDFE; color:#534AB7;">2</div>
+      <span class="sec-title">The Atom — SBB (Simple Bit Brick)</span>
+      <span class="sec-tag" style="background:#EEEDFE; color:#534AB7;">Module 1</span>
+    </div>
+    <div class="sec-body">
+      <div class="speaker-badge" style="background:#EEEDFE; color:#534AB7;">Speaker 1</div>
+      <div class="muted">Think of the SBB as the tiniest LEGO brick in our entire design.</div>
+      <div class="line">Every multiplication your phone does — at the very bottom, deep inside the chip — boils down to multiplying two tiny 2-bit numbers. That's exactly what the SBB does.</div>
+      <div class="line">We built it <span class="key">from scratch, gate by gate</span> — AND gates, Half Adders, Full Adders — using a mathematical technique called <span class="key">Baugh-Wooley</span> that handles negative numbers correctly in binary.</div>
+      <hr class="divider">
+      <div class="line">Most engineers would just type a "*" in their code and let the tool figure it out. We didn't. We manually wired every gate because we wanted to <span class="key">remove one Full Adder and one AND gate</span> that the standard approach wastes. Less gates = less power = less silicon area. At the atomic level, every gate saved matters.</div>
+      <div class="quote" style="border-color:#7F77DD;">
+        "It's like building a car engine by hand, bolt by bolt, instead of ordering a pre-assembled one — because you know exactly which bolts you don't need."
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3: BBU -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num" style="background:#EEEDFE; color:#534AB7;">3</div>
+      <span class="sec-title">The Building Block — BBU (Bit Brick Unit)</span>
+      <span class="sec-tag" style="background:#EEEDFE; color:#534AB7;">Module 2</span>
+    </div>
+    <div class="sec-body">
+      <div class="speaker-badge" style="background:#EEEDFE; color:#534AB7;">Speaker 1</div>
+      <div class="muted">Four SBBs working together — and smart enough to change their job based on the mode.</div>
+      <div class="line">The BBU takes two 4-bit numbers and multiplies them. It does this by splitting each number in half — a top half and a bottom half — and using four SBBs to multiply all the combinations.</div>
+      <div class="line">Here's the clever part: <span class="key">the BBU uses Karatsuba decomposition</span>. Instead of doing four separate multiplications and adding them up one by one, it rearranges the math so the cross-terms collapse into one operation. It's a shortcut that mathematicians figured out in the 1960s that we've now implemented in hardware.</div>
+      <hr class="divider">
+      <div class="line">In <span class="key">INT2 mode</span>: the BBU says "forget combining, just give me four independent small products packed side by side." That's how you get 4 results for the price of 1 memory read.</div>
+      <div class="line">In <span class="key">INT4/INT8 mode</span>: it fuses those products into one proper 11-bit result.</div>
+      <div class="quote" style="border-color:#7F77DD;">
+        "Same hardware, different personality depending on what you ask of it."
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4: RFU -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num" style="background:#E1F5EE; color:#0F6E56;">4</div>
+      <span class="sec-title">The Multiplier Brain — RFU (Recursive Fusion Unit)</span>
+      <span class="sec-tag" style="background:#E1F5EE; color:#0F6E56;">Module 3</span>
+    </div>
+    <div class="sec-body">
+      <div class="speaker-badge" style="background:#E1F5EE; color:#0F6E56;">Speaker 2</div>
+      <div class="muted">Four BBUs under one roof — the full 8-bit multiplier that drives everything.</div>
+      <div class="line">The RFU does the same trick the BBU did, but now at the 8-bit level. It splits two 8-bit numbers into nibbles and uses four BBUs — one for each nibble combination.</div>
+      <div class="line">The output is an <span class="key">80-bit wide bus</span> — and depending on the mode, those 80 bits mean completely different things:</div>
+      <div class="module-grid" style="grid-template-columns: 1fr 1fr 1fr;">
+        <div class="mod-card" style="border-color:#C0DD97;">
+          <div class="mod-name" style="color:#3B6D11;">INT8 mode</div>
+          <div class="mod-desc">One 16-bit result sits in the first 16 bits. 64 bits unused.</div>
+        </div>
+        <div class="mod-card" style="border-color:#AFA9EC;">
+          <div class="mod-name" style="color:#534AB7;">INT4 mode</div>
+          <div class="mod-desc">Four 11-bit results packed back-to-back. 2× the data per read.</div>
+        </div>
+        <div class="mod-card" style="border-color:#9FE1CB;">
+          <div class="mod-name" style="color:#0F6E56;">INT2 mode</div>
+          <div class="mod-desc">16 independent 5-bit products fill all 80 bits. 4× throughput.</div>
+        </div>
+      </div>
+      <hr class="divider">
+      <div class="line">And the best part: <span class="key">the RFU is fully combinational</span> — no clock, no wait. You put numbers in, the answer comes out in the same clock cycle. Pure speed.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 5: weight_mem -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num" style="background:#FAEEDA; color:#854F0B;">5</div>
+      <span class="sec-title">The Memory — weight_mem</span>
+      <span class="sec-tag" style="background:#FAEEDA; color:#854F0B;">Module 4</span>
+    </div>
+    <div class="sec-body">
+      <div class="speaker-badge" style="background:#FAEEDA; color:#854F0B;">Speaker 2</div>
+      <div class="muted">Where the numbers live before the math begins.</div>
+      <div class="line">Every MAC tile needs to store two things: the <span class="key">weights</span> (the learned knowledge of the neural network — these stay fixed per inference) and the <span class="key">input activations</span> (the data coming in — changes every time).</div>
+      <div class="line">We store both in two separate 256-byte memory arrays. They share a single address line driven by the FSM — so with one address, you get both numbers simultaneously.</div>
+      <hr class="divider">
+      <div class="line">Critical design decision: <span class="key">reads are asynchronous</span>. That means the moment the FSM sets an address, the data is available immediately — no waiting for the next clock edge. This saved us an entire pipeline stage, which directly improves our clock speed.</div>
+      <div class="quote" style="border-color:#EF9F27;">
+        "Like opening a book and seeing the page instantly — no page-turning delay."
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6: FSM -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num" style="background:#FAECE7; color:#993C1D;">6</div>
+      <span class="sec-title">The Brain — FSM (Finite State Machine)</span>
+      <span class="sec-tag" style="background:#FAECE7; color:#993C1D;">Module 5</span>
+    </div>
+    <div class="sec-body">
+      <div class="speaker-badge" style="background:#FAECE7; color:#993C1D;">Speaker 3</div>
+      <div class="muted">The conductor that keeps everything in sync.</div>
+      <div class="line">The FSM is like a stage director. It tells every other block when to start, when to run, and when they're done. It has four states:</div>
+      <div class="module-grid" style="grid-template-columns: 1fr 1fr 2fr;">
+        <div class="mod-card">
+          <div class="mod-name">IDLE</div>
+          <div class="mod-desc">Waiting for a "go" signal.</div>
+        </div>
+        <div class="mod-card">
+          <div class="mod-name">CLEAR</div>
+          <div class="mod-desc">Wipes the accumulator clean before starting fresh.</div>
+        </div>
+        <div class="mod-card">
+          <div class="mod-name">RUN</div>
+          <div class="mod-desc">Steps through memory addresses one by one, feeding data to the pipeline. Runs for N cycles.</div>
+        </div>
+      </div>
+      <div class="mod-card" style="margin-top:8px;">
+        <div class="mod-name">DONE</div>
+        <div class="mod-desc">Signals that the result is ready and valid.</div>
+      </div>
+      <hr class="divider">
+      <div class="line">Smart precision-aware scheduling: in INT8 mode it runs for N steps. In INT4, it runs for N/2 steps — because each memory read produces 2 products. In INT2, only N/4 steps needed. <span class="key">Automatic throughput scaling built into the control logic.</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION 7: pipe_reg + accumulator -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num" style="background:#FAECE7; color:#993C1D;">7</div>
+      <span class="sec-title">The Pipeline — pipe_reg & Accumulator</span>
+      <span class="sec-tag" style="background:#FAECE7; color:#993C1D;">Module 6 & 7</span>
+    </div>
+    <div class="sec-body">
+      <div class="speaker-badge" style="background:#FAECE7; color:#993C1D;">Speaker 3</div>
+      <div class="muted">The timing glue that makes everything run at 40 MHz without errors.</div>
+      <div class="line"><span class="key">pipe_reg</span> is an 80-bit register sitting between the RFU and the accumulator. Its job: break up the long chain of combinational logic so the chip can run faster. Without it, signals would have to travel too far in one clock cycle and the design would fail at high speeds.</div>
+      <div class="line">Think of it like a relay race — instead of one runner doing the whole track, two runners each do half. The total time is the same or less, but each runner can sprint.</div>
+      <hr class="divider">
+      <div class="line"><span class="key">Accumulator</span> adds up products cycle by cycle into a running 32-bit total. It knows the precision mode and sign-extends correctly for INT2, INT4, or INT8. It also has a critical fix: <span class="key">acc_en is delayed by one clock</span> to stay aligned with the pipeline stage — without this, the first result would be garbage.</div>
+      <div class="quote" style="border-color:#D85A30;">
+        "This is the kind of subtle bug that kills projects in the final hour. We caught it, fixed it, and built the delay register deliberately."
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8: psmac_top -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num" style="background:#E1F5EE; color:#0F6E56;">8</div>
+      <span class="sec-title">One Complete Tile — psmac_top</span>
+      <span class="sec-tag" style="background:#E1F5EE; color:#0F6E56;">Module 8</span>
+    </div>
+    <div class="sec-body">
+      <div class="speaker-badge" style="background:#E1F5EE; color:#0F6E56;">Speaker 4</div>
+      <div class="muted">All six blocks wired together into one working compute tile.</div>
+      <div class="line">psmac_top is the full package: memory + multiply + pipeline + accumulate + control, all in one module. It takes in two vectors, computes their dot product, and outputs a 32-bit result with an <span class="key">out_valid</span> flag when done.</div>
+      <div class="line">The data flow inside one tile, every clock cycle:</div>
+      <div style="font-size:13px; color:var(--color-text-secondary); background:var(--color-background-secondary); border-radius:var(--border-radius-md); padding:10px 14px; margin:0.5rem 0; font-family: var(--font-mono); line-height:2;">
+        FSM drives addr → weight_mem reads x &amp; w (same cycle) → RFU multiplies (same cycle) → pipe_reg latches → accumulator adds → result ready
+      </div>
+      <div class="line">This is a <span class="key">2-stage pipeline</span>. While the accumulator is adding last cycle's product, the RFU is already computing this cycle's product. Overlap = efficiency.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 9: npu_ctrl + npu_4_4 -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num" style="background:#E6F1FB; color:#185FA5;">9</div>
+      <span class="sec-title">The Full Array — npu_4_4 & npu_ctrl</span>
+      <span class="sec-tag" style="background:#E6F1FB; color:#185FA5;">Module 9 & 10</span>
+    </div>
+    <div class="sec-body">
+      <div class="speaker-badge" style="background:#E6F1FB; color:#185FA5;">Speaker 4</div>
+      <div class="muted">16 tiles working in parallel — a real matrix multiplier.</div>
+      <div class="line">npu_4_4 is a 4×4 grid of 16 psmac_top tiles. Each tile computes one output of the matrix multiplication Y = W × X. All 16 run <span class="key">simultaneously</span> — so a full matrix multiply takes the same time as a single dot product.</div>
+      <div class="line"><span class="key">npu_ctrl</span> is the top-level choreographer. It automates the entire inference cycle through 5 states:</div>
+      <div class="module-grid" style="grid-template-columns: repeat(5, 1fr);">
+        <div class="mod-card" style="border-color:#B5D4F4; text-align:center;">
+          <div class="mod-name" style="color:#185FA5;">IDLE</div>
+          <div class="mod-desc">Wait for start signal</div>
+        </div>
+        <div class="mod-card" style="border-color:#B5D4F4; text-align:center;">
+          <div class="mod-name" style="color:#185FA5;">LOAD_W</div>
+          <div class="mod-desc">Fill all 16 weight memories</div>
+        </div>
+        <div class="mod-card" style="border-color:#B5D4F4; text-align:center;">
+          <div class="mod-name" style="color:#185FA5;">LOAD_X</div>
+          <div class="mod-desc">Broadcast inputs column by column</div>
+        </div>
+        <div class="mod-card" style="border-color:#B5D4F4; text-align:center;">
+          <div class="mod-name" style="color:#185FA5;">RUN</div>
+          <div class="mod-desc">Trigger all 16 MACs at once</div>
+        </div>
+        <div class="mod-card" style="border-color:#B5D4F4; text-align:center;">
+          <div class="mod-name" style="color:#185FA5;">COLLECT</div>
+          <div class="mod-desc">Gather results via selector mux</div>
+        </div>
+      </div>
+      <div class="line" style="margin-top:0.75rem;">out_valid only goes high when <span class="key">all 16 tiles</span> have finished — it's the AND of 16 individual valid signals. No tile left behind.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 10: Results -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num" style="background:#EAF3DE; color:#3B6D11;">10</div>
+      <span class="sec-title">What We Achieved</span>
+      <span class="sec-tag" style="background:#EAF3DE; color:#3B6D11;">Results</span>
+    </div>
+    <div class="sec-body">
+      <div class="speaker-badge" style="background:#EAF3DE; color:#3B6D11;">Any / All</div>
+      <div class="module-grid" style="grid-template-columns: repeat(3, 1fr); margin-bottom:0.75rem;">
+        <div class="mod-card" style="text-align:center;">
+          <div style="font-size:24px; font-weight:500; color:var(--color-text-primary);">40 MHz</div>
+          <div class="mod-desc">Operating frequency on Cyclone IV FPGA</div>
+        </div>
+        <div class="mod-card" style="text-align:center;">
+          <div style="font-size:24px; font-weight:500; color:var(--color-text-primary);">4×</div>
+          <div class="mod-desc">Throughput gain in INT2 mode vs INT8 baseline</div>
+        </div>
+        <div class="mod-card" style="text-align:center;">
+          <div style="font-size:24px; font-weight:500; color:var(--color-text-primary);">16 tiles</div>
+          <div class="mod-desc">Parallel MAC units, all running simultaneously</div>
+        </div>
+      </div>
+      <div class="line">Single unified datapath. No duplicated hardware. Runtime precision switching. FPGA-friendly, edge-deployable architecture.</div>
+    </div>
+  </div>
+
+  <!-- SECTION 11: Applications -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num" style="background:#EEEDFE; color:#534AB7;">11</div>
+      <span class="sec-title">Real-Life Applications</span>
+      <span class="sec-tag" style="background:#EEEDFE; color:#534AB7;">Impact</span>
+    </div>
+    <div class="sec-body">
+      <div class="module-grid" style="grid-template-columns: 1fr 1fr;">
+        <div class="mod-card">
+          <div class="mod-name">Smartwatch health monitoring</div>
+          <div class="mod-desc">Run ECG/heart anomaly detection in INT2 on a coin-cell battery. 4× longer battery life.</div>
+        </div>
+        <div class="mod-card">
+          <div class="mod-name">Industrial cameras</div>
+          <div class="mod-desc">Real-time defect detection on a factory floor with sub-millisecond latency. No cloud dependency.</div>
+        </div>
+        <div class="mod-card">
+          <div class="mod-name">Wake word detection</div>
+          <div class="mod-desc">"Hey Siri / Alexa" style always-on models running INT2 — matches what Arm Ethos NPU targets.</div>
+        </div>
+        <div class="mod-card">
+          <div class="mod-name">Drone / UAV onboard AI</div>
+          <div class="mod-desc">Obstacle avoidance inference on FPGAs in real-time. Weight-stationary design fits perfectly.</div>
+        </div>
+        <div class="mod-card">
+          <div class="mod-name">Automotive ADAS</div>
+          <div class="mod-desc">FPGA pre-processing for lane/object detection before the main SoC. Deterministic latency.</div>
+        </div>
+        <div class="mod-card">
+          <div class="mod-name">Satellite / space systems</div>
+          <div class="mod-desc">Radiation-tolerant FPGAs running AI — our LUT-only (no DSP) design maps cleanly to space-grade FPGAs.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 12: Closing -->
+  <div class="section">
+    <div class="sec-header">
+      <div class="sec-num" style="background:#E6F1FB; color:#185FA5;">12</div>
+      <span class="sec-title">Closing Statement</span>
+      <span class="sec-tag" style="background:#E6F1FB; color:#185FA5;">Closing</span>
+    </div>
+    <div class="sec-body">
+      <div class="speaker-badge" style="background:#E6F1FB; color:#185FA5;">Any team member</div>
+      <div class="quote" style="border-color:#378ADD;">
+        "We didn't just build a MAC unit. We built a flexible AI accelerator that can adapt to what the application needs — more accuracy when it matters, more speed when power is precious. That's the future of edge AI hardware. And we built it, from scratch, in Verilog, on a real FPGA."
+      </div>
+      <hr class="divider">
+      <div class="line">The hierarchy goes: <span class="key">SBB → BBU → RFU → psmac_top → npu_4_4</span>. Every level was designed with intent. Every timing fix was earned through debugging. Every mode switch was verified. This is not a simulation toy — it's a working, synthesizable, FPGA-deployed neural processing unit.</div>
+      <div class="line" style="margin-top:0.75rem; color:var(--color-text-secondary); font-size:13px;">Thank you. We're happy to take questions on any module.</div>
+    </div>
+  </div>
+
+</div>

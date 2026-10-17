@@ -1,0 +1,34 @@
+module accumulator(
+    input             clk, rst,
+    input      [79:0] data_out,
+    input      [1:0]  mode_out,
+    input             acc_en, clear,
+    output reg [31:0] result
+);
+
+    // INT8
+    wire signed [31:0] int8_sum = {{16{data_out[15]}}, data_out[15:0]};
+
+   //INT4
+    wire signed [31:0] int4_p0  = {{21{data_out[10]}}, data_out[10:0]};
+    wire signed [31:0] int4_p3  = {{21{data_out[43]}}, data_out[43:33]};
+    wire signed [31:0] int4_sum = int4_p0 + int4_p3;
+
+   //INT2
+    wire signed [31:0] int2_p0  = {{27{data_out[4]}},  data_out[4:0]};
+    wire signed [31:0] int2_p1  = {{27{data_out[19]}}, data_out[19:15]};
+    wire signed [31:0] int2_p2  = {{27{data_out[64]}}, data_out[64:60]};
+    wire signed [31:0] int2_p3  = {{27{data_out[79]}}, data_out[79:75]};
+    wire signed [31:0] int2_sum = int2_p0 + int2_p1 + int2_p2 + int2_p3;
+
+    wire signed [31:0] tree_out = (mode_out == 2'b10) ? int8_sum :
+                                   (mode_out == 2'b01) ? int4_sum :
+                                                         int2_sum;
+
+    always @(posedge clk) begin
+        if (rst)         result <= 32'b0;
+        else if (clear)  result <= 32'b0;
+        else if (acc_en) result <= result + tree_out;
+    end
+
+endmodule

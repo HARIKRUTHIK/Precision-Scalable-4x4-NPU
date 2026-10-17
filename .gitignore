@@ -1,0 +1,28 @@
+# Simulation outputs
+*.out
+*.vcd
+*.vvp
+*.wlf
+transcript
+
+# Quartus / ModelSim work directories
+db/
+incremental_db/
+simulation/
+output_files/
+work/
+
+# Python / Jupyter
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+*.pth
+*.pt
+*.h5
+
+# OS / Temporary
+.DS_Store
+Thumbs.db
+*.bak
+*.tmp
